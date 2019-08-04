@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--
        xmlns 即 xml namespace  xml使用的命名空间
        xmlns:xsi 即xml schema instance xml 遵守的具体规范
        xsi:schemaLocation 本文档xml遵守的规范 官方指定
      -->
+<!--    ||||||||||||||||||||||||||||||||||||||通过xml实例化bean的三种方式|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
     <!-- 空构造 -->
 <!--    <bean id="helloService" class="com.yuanziren.service.HelloService"></bean>-->
 
@@ -22,7 +26,7 @@
     <!--<import resource="dao.xml"/>-->
 <!--    <import resource="service.xml"/>-->
     <!--<import resource="controller.xml"/>-->
-<!--   |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--   ||||||||||||||||||||||||||||||||通过xml依赖注入的四种方式|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <!--   通过 set 方式注入-->
 <!--    <bean id="userDao" class="com.yuanziren.dao.UserDao"></bean>-->
@@ -43,13 +47,19 @@
 <!--    </bean>-->
 
     <!-- 实例化工厂注入 -->
-    <bean id="initFactory" class="com.yuanziren.factory.InitFactory"></bean>
-    <bean id="userDao" factory-bean="initFactory" factory-method="getUserService"></bean>
-    <bean id="userService" class="com.yuanziren.service.UserService">
-        <property name="userDao" ref="userDao"></property>
-    </bean>
+<!--    <bean id="initFactory" class="com.yuanziren.factory.InitFactory"></bean>-->
+<!--    <bean id="userDao" factory-bean="initFactory" factory-method="getUserService"></bean>-->
+<!--    <bean id="userService" class="com.yuanziren.service.UserService">-->
+<!--        <property name="userDao" ref="userDao"></property>-->
+<!--    </bean>-->
+<!--    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
+    <!-- 开启bean扫描 -->
+    <context:component-scan base-package="com.yuanziren"/>
 
+<!--    <bean id="userDao" class="com.yuanziren.dao.UserDao"></bean>-->
+
+<!--    <bean id="userService" class="com.yuanziren.service.UserService"></bean>-->
 
 
 

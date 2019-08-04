@@ -51,3 +51,10 @@
                  <property name="userDao" ref="userDao"></property>
             </bean>
         4.2在InitFactory类中创建userDao的实例
+五、通过注解实现实例化bean以及依赖注入
+    1.在xml中开启bean扫描
+        <context:component-scan base-package="com.yuanziren"/>
+    2.在各个类上添加注解@Controller，@Service，@Repository，这样spring就会通过bean扫描将该类的实例注入到IOC容器中统一管理。
+    3.如果具体某个类中需要获得该类的bean的实例，需要从IOC容器中获取，这里提供了两个注解来将容器中的bean注入进来
+        3.1@Autowired
+        3.2@Resources
