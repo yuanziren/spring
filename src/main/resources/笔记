@@ -21,3 +21,33 @@
             <bean id="initFactory" class="com.yuanziren.factory.InitFactory"></bean>
             <bean id="helloService" factory-bean="initFactory" factory-method="getHelloService"></bean>
         3.2编写InitFactory类以及该类提供的实现方法，从该方法中返回helloService的实例
+三、对象依赖注入的方式
+    1.set注入
+        1.1在spring.xml中添加
+            <bean id="userDao" class="com.yuanziren.dao.UserDao"></bean>
+            <bean id="userService" class="com.yuanziren.service.UserService">
+                <property name="userDao" ref="userDao"></property>
+             /bean>
+        1.2在UserService里添加set方法，将userDao对象注入进来
+    2.构造器注入
+        2.1在spring.xml中添加
+            <bean id="userDao" class="com.yuanziren.dao.UserDao"></bean>
+            <bean id="accountService" class="com.yuanziren.service.AccountService">
+                    <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+            </bean>
+        2.2在AccountService里添加构造方法，将userDao对象注入进来
+    3.静态工厂注入
+        3.1在spring.xml中添加
+            <bean id="userDao" class="com.yuanziren.factory.StaticFactory" factory-method="getUserDao"></bean>
+            <bean id="userService" class="com.yuanziren.service.UserService">
+                    <property name="userDao" ref="userDao"></property>
+            </bean>
+        3.2在StaticFactory类中创建userDao的实例
+    4.实例化工厂注入
+        4.1在spring.xml中添加
+            <bean id="initFactory" class="com.yuanziren.factory.InitFactory"></bean>
+            <bean id="userDao" factory-bean="initFactory" factory-method="getUserService"></bean>
+            <bean id="userService" class="com.yuanziren.service.UserService">
+                 <property name="userDao" ref="userDao"></property>
+            </bean>
+        4.2在InitFactory类中创建userDao的实例

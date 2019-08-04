@@ -9,7 +9,7 @@
        xsi:schemaLocation 本文档xml遵守的规范 官方指定
      -->
     <!-- 空构造 -->
-    <bean id="helloService" class="com.yuanziren.service.HelloService"></bean>
+<!--    <bean id="helloService" class="com.yuanziren.service.HelloService"></bean>-->
 
     <!-- 静态工厂 -->
 <!--    <bean id="helloService" class="com.yuanziren.factory.StaticFactory" factory-method="getHelloService"></bean>-->
@@ -22,4 +22,35 @@
     <!--<import resource="dao.xml"/>-->
 <!--    <import resource="service.xml"/>-->
     <!--<import resource="controller.xml"/>-->
+<!--   |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+<!--   通过 set 方式注入-->
+<!--    <bean id="userDao" class="com.yuanziren.dao.UserDao"></bean>-->
+<!--    <bean id="userService" class="com.yuanziren.service.UserService">-->
+<!--        <property name="userDao" ref="userDao"></property>-->
+<!--    </bean>-->
+
+    <!-- 构造器注入 -->
+<!--    <bean id="userDao" class="com.yuanziren.dao.UserDao"></bean>-->
+<!--    <bean id="accountService" class="com.yuanziren.service.AccountService">-->
+<!--        <constructor-arg name="userDao" ref="userDao"></constructor-arg>-->
+<!--    </bean>-->
+
+    <!-- 静态工厂注入 -->
+<!--    <bean id="userDao" class="com.yuanziren.factory.StaticFactory" factory-method="getUserDao"></bean>-->
+<!--    <bean id="userService" class="com.yuanziren.service.UserService">-->
+<!--        <property name="userDao" ref="userDao"></property>-->
+<!--    </bean>-->
+
+    <!-- 实例化工厂注入 -->
+    <bean id="initFactory" class="com.yuanziren.factory.InitFactory"></bean>
+    <bean id="userDao" factory-bean="initFactory" factory-method="getUserService"></bean>
+    <bean id="userService" class="com.yuanziren.service.UserService">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+
+
+
+
 </beans>
